@@ -1,59 +1,251 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🗺️ OlharViajante
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Plataforma de descoberta de pontos turísticos brasileiros, construída com **Laravel 13**, **Inertia.js v3**, **Vue 3** (Composition API), **Tailwind CSS v4** e **DaisyUI v5**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Funcionalidades
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Explorar destinos** — Grid paginado com busca, filtros por categoria/cidade/estado e ordenação
+- **Detalhes do ponto turístico** — Galeria de imagens, avaliação por estrelas, informações, comentários, curtir e favoritar
+- **Favoritos** — Autenticação necessária; lista pessoal de destinos salvos
+- **Stories** — Barra estilo Instagram com previews dos destinos em destaque
+- **Comentários** — Visitantes podem comentar (nome + texto) sem login
+- **Perfil do usuário** — Avatar, bio, localização, estatísticas e edição de conta
+- **Autenticação completa** — Cadastro, login, recuperação de senha
+- **Tema dark/light** — Alternância persistida no localStorage
+- **Design responsivo** — Mobile-first com sidebar adaptável
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🧱 Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Camada        | Tecnologia                                     |
+|---------------|------------------------------------------------|
+| Backend       | PHP 8.3+, Laravel 13                           |
+| Frontend      | Vue 3 (Composition API, `<script setup>`)      |
+| SSR/Middleware| Inertia.js v3 (`@inertiajs/vue3`)              |
+| CSS           | Tailwind CSS v4 + DaisyUI v5                   |
+| Build         | Vite 8 + laravel-vite-plugin                   |
+| Database      | MySQL (`db_olharviajante`)                     |
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 📁 Estrutura do Projeto
 
-## Agentic Development
+```
+app/
+├── Http/
+│   ├── Controllers/
+│   │   ├── Auth/
+│   │   │   ├── LoginController.php
+│   │   │   ├── RegisterController.php
+│   │   │   ├── ForgotPasswordController.php
+│   │   │   ├── ResetPasswordController.php
+│   │   │   └── ProfileController.php
+│   │   └── PontoTuristicoController.php
+│   └── Middleware/
+│       └── HandleInertiaRequests.php
+├── Models/
+│   ├── User.php
+│   ├── PontoTuristico.php
+│   └── Comentario.php
+└── Providers/
+    └── AppServiceProvider.php
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+database/
+├── migrations/           # 8 migrations (tabelas + alterações)
+└── seeders/              # DatabaseSeeder, PontoTuristicoSeeder (16 destinos),
+                          # PontoTuristicoMassSeeder (1000 aleatórios), ComentarioSeeder
 
-```bash
-composer require laravel/boost --dev
+resources/js/
+├── Components/           # 18 componentes reutilizáveis
+│   ├── PostCard.vue
+│   ├── PostGrid.vue
+│   ├── Filters.vue
+│   ├── SearchBar.vue
+│   ├── LocationFilter.vue
+│   ├── DestinosCarrossel.vue
+│   ├── StoriesBar.vue
+│   ├── Pagination.vue
+│   ├── CommentsModal.vue
+│   ├── StoryModal.vue
+│   ├── InstagramPost.vue
+│   ├── InstagramGrid.vue
+│   ├── SkeletonGrid.vue
+│   ├── PasswordStrength.vue
+│   ├── NavLink.vue / Dropdown.vue / DropdownLink.vue / ResponsiveNavLink.vue
+├── Pages/
+│   ├── Home.vue
+│   ├── Favoritos.vue
+│   ├── Profile.vue
+│   ├── PontosTuristicos/Show.vue
+│   └── Auth/ (Login, Register, ForgotPassword, ResetPassword)
+└── Layouts/
+    ├── MainLayout.vue
+    └── AuthenticatedLayout.vue
 
-php artisan boost:install
+routes/
+└── web.php               # 20+ rotas (home, auth, CRUD comentários, favoritar)
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 🗄️ Banco de Dados
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Tabelas
 
-## Code of Conduct
+| Tabela               | Descrição                                      |
+|----------------------|------------------------------------------------|
+| `users`              | Usuários (name, email, password, avatar, bio, location) |
+| `pontos_turisticos`  | Destinos (nome, descrição, imagens, categoria, estado, avaliação, etc.) |
+| `comentarios`        | Comentários (ponto_turistico_id, nome, conteudo) |
+| `favoritos`          | Favoritos (user_id FK, ponto_turistico_id FK, unique pair) |
+| `cache`, `cache_locks` | Cache do Laravel                             |
+| `jobs`, `job_batches`, `failed_jobs` | Filas                |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Migrations (8 arquivos)
 
-## Security Vulnerabilities
+1. `create_users_table` — users, password_reset_tokens, sessions
+2. `create_cache_table` — cache, cache_locks
+3. `create_jobs_table` — jobs, job_batches, failed_jobs
+4. `create_pontos_turisticos_table` — pontos_turisticos (15 colunas)
+5. `create_comentarios_table` — comentarios
+6. `add_imagens_to_pontos_turisticos` — adiciona coluna `imagens` (json)
+7. `add_profile_fields_to_users_table` — adiciona avatar, bio, location
+8. `create_favoritos_table` — favoritos (com unique constraint)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 🧠 Modelos e Relacionamentos
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# improved-guacamole
+| Modelo          | Relacionamentos |
+|-----------------|----------------|
+| `User`          | `hasMany(PontoTuristico)`, `belongsToMany(Favoritos)` |
+| `PontoTuristico`| `hasMany(Comentario)`, `belongsToMany(Favoritos)`, scopes de busca/filtro/ordenação |
+| `Comentario`    | `belongsTo(PontoTuristico)` |
+
+### Scopes do `PontoTuristico`
+
+- `busca(?search)` — LIKE em nome, descricao, descricao_curta
+- `porCategoria(?categoria)` — WHERE categoria
+- `porEstado(?uf)` — WHERE estado
+- `porCidade(?cidade)` — WHERE cidade
+- `ordenar(?sort)` — `antigos`, `melhores`, `visualizados`, default (mais recentes)
+
+---
+
+## 🌐 Rotas
+
+### Públicas
+| Método | URI | Ação |
+|--------|-----|------|
+| GET | `/` | Home com grid de destinos |
+| GET | `/pontos-turisticos/{id}` | Detalhes do destino |
+| POST | `/pontos-turisticos/{id}/curtir` | Curtir |
+| POST | `/pontos-turisticos/{id}/descurtir` | Descurtir |
+| POST | `/pontos-turisticos/{id}/comentar` | Comentar (público) |
+| GET | `/pontos-turisticos/{id}/comentarios` | Listar comentários (JSON) |
+
+### Autenticação (guest)
+| Método | URI | Ação |
+|--------|-----|------|
+| GET/POST | `/login` | Login |
+| GET/POST | `/register` | Cadastro |
+| GET/POST | `/forgot-password` | Esqueci senha |
+| GET/POST | `/reset-password/{token}` | Redefinir senha |
+
+### Autenticadas (auth)
+| Método | URI | Ação |
+|--------|-----|------|
+| POST | `/logout` | Logout |
+| GET/PATCH | `/profile` | Editar perfil |
+| POST | `/profile/avatar` | Upload avatar |
+| POST | `/profile/password` | Alterar senha |
+| GET | `/favoritos` | Lista de favoritos |
+| POST | `/pontos-turisticos/{id}/favoritar` | Favoritar/desfavoritar |
+
+---
+
+## 🖥️ Componentes Frontend
+
+| Componente | Função |
+|-----------|--------|
+| `PostCard` | Card de destino com imagem, avaliação, like/favoritar |
+| `PostGrid` | Grid responsivo (1-3 colunas) |
+| `Filters` | Filtros por categoria, estado, cidade, ordenação |
+| `SearchBar` | Campo de busca estilo Join |
+| `LocationFilter` | Geolocalização via IP (ip-api.com) |
+| `DestinosCarrossel` | Carrossel horizontal de destinos em alta |
+| `StoriesBar` | Barra de stories estilo Instagram |
+| `Pagination` | Navegação entre páginas |
+| `CommentsModal` | Modal de comentários |
+| `StoryModal` | Modal de preview de story |
+| `InstagramPost` | Post estilo Instagram com animação de coração |
+| `InstagramGrid` | Grid de fotos estilo Instagram |
+| `SkeletonGrid` | Skeleton loading (6 placeholders) |
+| `PasswordStrength` | Indicador de força de senha |
+
+---
+
+## 🛠️ Instalação
+
+```bash
+# 1. Clonar
+git clone git@github.com:ceara-dev/improved-guacamole.git
+cd improved-guacamole
+
+# 2. Instalar dependências PHP
+composer install
+
+# 3. Configurar ambiente
+cp .env.example .env
+php artisan key:generate
+
+# 4. Configurar .env (banco MySQL)
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=db_olharviajante
+DB_USERNAME=root
+DB_PASSWORD=
+
+# 5. Migrar e seedar
+php artisan migrate
+php artisan db:seed
+
+# 6. Instalar dependências JS
+npm install
+
+# 7. Build assets
+npm run build
+
+# 8. Servir
+php artisan serve
+# Em outro terminal:
+npm run dev
+```
+
+### Script de setup completo
+```bash
+composer run setup
+```
+
+### Desenvolvimento com hot-reload
+```bash
+composer run dev
+```
+
+---
+
+## 🧪 Testes
+
+```bash
+composer run test
+```
+
+---
+
+## 📄 Licença
+
+MIT

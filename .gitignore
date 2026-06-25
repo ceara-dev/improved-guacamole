@@ -1,0 +1,94 @@
+*.log
+.DS_Store
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+/.codex
+/.cursor/
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/auth.json
+/node_modules
+/public/build
+/public/fonts-manifest.dev.json
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+_ide_helper.php
+Homestead.json
+Homestead.yaml
+Thumbs.db
+
+# OS
+desktop.ini
+.directory
+.Trash-*
+*.lnk
+
+# Editor temp/swap
+*.swp
+*.swo
+*~
+.*~
+
+# IDE
+/.netbeans/
+/.phpstorm/
+/nbproject/
+.project
+.buildpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Environment overrides
+.env.local
+.env.*.local
+
+# Package manager lock files (fallback)
+yarn.lock
+pnpm-lock.yaml
+.pnpm-store/
+bun.lockb
+bun.lock
+
+# npm debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Database dumps & backups
+*.sql
+*.sqlite
+*.sqlite-journal
+*.db
+*.dump
+*.bak
+*.backup
+*.old
+*.orig
+
+# Temp files
+*.tmp
+*.temp
+
+# Test artifacts
+/coverage/
+*.coverage
+
+# Laravel generated/cached (root fallback)
+/bootstrap/cache/*
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/framework/testing/*
+/storage/logs/*
+/storage/app/public/*
+/storage/app/private/*
